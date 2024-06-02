@@ -28,16 +28,13 @@ async function addBlog(req, res) {
   }
 }
 
-async function getBlogs(req, res) {
-  const allBlogs = await BlogModel.find({});
+const getBlogs = async (req, res) => {
   try {
-    if (allBlogs != null) {
-      res.status(200).json({ success: `${allBlogs}` });
-      return allBlogs;
-    }
-  } catch (err) {
-    res.status(400).json({ error: "data not found" });
+    const allBlogs = await BlogModel.find();
+    res.status(200).json(allBlogs);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
-}
+};
 
 module.exports = { addBlog, upload, getBlogs };

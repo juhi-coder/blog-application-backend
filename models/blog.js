@@ -1,7 +1,11 @@
 const { Schema, model } = require("mongoose");
-
+const UserModel = require("../models/user");
 const blogSchema = new Schema(
   {
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: UserModel.modelName,
+    },
     title: {
       type: String,
       required: true,
